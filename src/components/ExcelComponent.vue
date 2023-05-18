@@ -8,8 +8,8 @@
 
   <div>
     <p>Table</p> 
-    <table class="guests min-w-full divide-y divide-gray-200 table-fixed dark:border-slate-500 border-2">
-        <thead class="bg-slate-100 dark:bg-slate-500">
+    <table class="table">
+        <thead>
             <tr>
               <th scope="col">
                   Title
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         
-        <tbody v-for="row in rows" :key="row" class="divide-y divide-gray-200">
+        <tbody v-for="row in rows" :key="row">
             <tr>
               <td>{{ row.Title }}</td>
               <td>{{ row.Category }}</td>
@@ -59,5 +59,9 @@ watch(files, () => {
 <style scoped>
 .read-the-docs {
   color: #888;
+}
+
+.table {
+  margin: 0 auto;
 }
 </style>
