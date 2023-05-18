@@ -6,8 +6,31 @@
     <button type="button" @click="open({ multiple: false})">Choose file</button>
   </div>
 
-  <div class="card">
-    <button type="button" @click="count++"> count is {{ count }} </button>
+  <div>
+    <p>Table</p> 
+    <table class="guests min-w-full divide-y divide-gray-200 table-fixed dark:border-slate-500 border-2">
+        <thead class="bg-slate-100 dark:bg-slate-500">
+            <tr>
+              <th scope="col">
+                  Title
+              </th>
+              <th scope="col">
+                  Category
+              </th>
+              <th scope="col">
+                  Location
+              </th>
+            </tr>
+        </thead>
+        
+        <tbody v-for="row in rows" :key="row" class="divide-y divide-gray-200">
+            <tr>
+              <td>{{ row.Title }}</td>
+              <td>{{ row.Category }}</td>
+              <td>{{ row.Location }}</td>
+            </tr>
+        </tbody>
+    </table>
   </div>
 </template>
 
@@ -17,18 +40,18 @@ import { useFileDialog } from '@vueuse/core'
 import { readExcel } from '../composables/importExcel'
 
 defineProps<{ msg: string }>();
-
-const count = ref(0);
+const rows = ref<Array>([])
 
 const { files, open } = useFileDialog();
 
 watch(files, () => {
-  console.log(files.value);
   const excelFile = files.value?.item(0);
   readExcel(excelFile!).then((res) => {
-    console.log(res)
+    if(res) {
+      console.log(res)
+      rows.value = res
+    }
   })
-  console.log(excelFile)
 })
 
 </script>
