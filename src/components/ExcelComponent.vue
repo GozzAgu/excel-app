@@ -40,7 +40,7 @@ import { useFileDialog } from '@vueuse/core'
 import { readExcel } from '../composables/importExcel'
 
 defineProps<{ msg: string }>();
-const rows = ref<Array>([])
+const rows = ref<any>([])
 
 const { files, open } = useFileDialog();
 
